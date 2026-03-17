@@ -1,0 +1,26 @@
+# VS Code
+.vscode/
+
+# VS Build
+bin/
+obj/
+
+# Docs
+Docs/
+
+# NuGet
+packages/
+
+# User specific
+.user
+.suo
+.userosscache
+.vspscc
+.vssscc
+.vspscc
+.vssscc
+
+# Other
+*.log
+*.tmp
+*.bak
