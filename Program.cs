@@ -1,6 +1,13 @@
 using WalletCorp.API.Data;
+using WalletCorp.API.Helpers;
+using WalletCorp.API.Modules.Auth.Services.Interfaces;
+using WalletCorp.API.Modules.Users.Services.Interfaces;
+using WalletCorp.API.Modules.Auth.Services.Implementations;
+using WalletCorp.API.Modules.Users.Services.Implementations;
 
 using System.Text;
+using System.Text.Json.Serialization;
+
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
@@ -8,7 +15,11 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 var builder = WebApplication.CreateBuilder(args);
 
 // Controllers
-builder.Services.AddControllers();
+builder.Services.AddControllers()
+    .AddJsonOptions(options =>
+    {
+        options.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter());
+    });
 
 // OpenAPI
 builder.Services.AddOpenApi();
@@ -52,6 +63,9 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
     });
 
 builder.Services.AddAuthorization();
+builder.Services.AddScoped<JwtHelper>();
+builder.Services.AddScoped<IAuthService, AuthService>();
+builder.Services.AddScoped<IUserService, UserService>();
 
 var app = builder.Build();
 
