@@ -8,9 +8,11 @@ public class User
     public string PasswordHash { get; set; } = string.Empty;
     public string Role { get; set; } = string.Empty;
     public int CompanyId { get; set; }
+    public int? BenefitPlanId { get; set; }
     public DateTime CreatedAt { get; set; }
 
     public Company? Company { get; set; }
+    public BenefitPlan? BenefitPlan { get; set; }
     public Wallet? Wallet { get; set; }
     public ICollection<AuditLog> AuditLogs { get; set; } = new List<AuditLog>();
 }

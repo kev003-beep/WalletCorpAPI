@@ -10,4 +10,5 @@ public class BenefitPlan
 
     public Company? Company { get; set; }
     public ICollection<BenefitPlanCategory> Categories { get; set; } = new List<BenefitPlanCategory>();
+    public ICollection<User> Users { get; set; } = new List<User>();
 }

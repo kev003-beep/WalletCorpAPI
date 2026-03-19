@@ -4,6 +4,12 @@ using WalletCorp.API.Modules.Auth.Services.Interfaces;
 using WalletCorp.API.Modules.Users.Services.Interfaces;
 using WalletCorp.API.Modules.Auth.Services.Implementations;
 using WalletCorp.API.Modules.Users.Services.Implementations;
+using WalletCorp.API.Modules.Companies.Services.Interfaces;
+using WalletCorp.API.Modules.Companies.Services.Implementations;
+using WalletCorp.API.Modules.BenefitPlanCategories.Services.Interfaces;
+using WalletCorp.API.Modules.BenefitPlanCategories.Services.Implementations;
+using WalletCorp.API.Modules.BenefitPlans.Services.Interfaces;
+using WalletCorp.API.Modules.BenefitPlans.Services.Implementations;
 
 using System.Text;
 using System.Text.Json.Serialization;
@@ -65,7 +71,10 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
 builder.Services.AddAuthorization();
 builder.Services.AddScoped<JwtHelper>();
 builder.Services.AddScoped<IAuthService, AuthService>();
+builder.Services.AddScoped<ICompanyService, CompanyService>();
 builder.Services.AddScoped<IUserService, UserService>();
+builder.Services.AddScoped<IBenefitPlanCategoryService, BenefitPlanCategoryService>();
+builder.Services.AddScoped<IBenefitPlanService, BenefitPlanService>();
 
 var app = builder.Build();
 

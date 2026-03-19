@@ -54,12 +54,18 @@ public class AppDbContext : DbContext
             entity.Property(e => e.Email).IsRequired().HasDefaultValue(string.Empty);
             entity.Property(e => e.PasswordHash).IsRequired().HasDefaultValue(string.Empty);
             entity.Property(e => e.Role).IsRequired().HasDefaultValue(string.Empty);
+            entity.Property(e => e.BenefitPlanId);
             entity.Property(e => e.CreatedAt).HasColumnType("timestamptz").HasDefaultValueSql("NOW()");
 
             entity.HasOne(e => e.Company)
                 .WithMany(e => e.Users)
                 .HasForeignKey(e => e.CompanyId)
                 .OnDelete(DeleteBehavior.Cascade);
+
+            entity.HasOne(e => e.BenefitPlan)
+                .WithMany(e => e.Users)
+                .HasForeignKey(e => e.BenefitPlanId)
+                .OnDelete(DeleteBehavior.SetNull);
 
             entity.HasOne(e => e.Wallet)
                 .WithOne(e => e.User)
